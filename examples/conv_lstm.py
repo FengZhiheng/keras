@@ -52,7 +52,6 @@ def generate_movies(n_samples=1200, n_frames=15):
     noisy_movies = np.zeros((n_samples, n_frames, row, col, 1), dtype=np.float)
     shifted_movies = np.zeros((n_samples, n_frames, row, col, 1),
                               dtype=np.float)
-
     for i in range(n_samples):
         # Add 3 to 7 moving squares
         n = np.random.randint(3, 8)
@@ -101,9 +100,9 @@ def generate_movies(n_samples=1200, n_frames=15):
 
 # Train the network
 noisy_movies, shifted_movies = generate_movies(n_samples=1200)
-seq.fit(noisy_movies[:1000], shifted_movies[:1000], batch_size=10,
-        epochs=300, validation_split=0.05)
-
+# seq.fit(noisy_movies[:1000], shifted_movies[:1000], batch_size=10,
+#         epochs=30, validation_split=0.05)
+dataPath = 'D:/Data/conv_lstm_data/predict_movies/'
 # Testing the network on one movie
 # feed it with the first 7 positions and then
 # predict the new positions
@@ -114,30 +113,24 @@ for j in range(16):
     new_pos = seq.predict(track[np.newaxis, ::, ::, ::, ::])
     new = new_pos[::, -1, ::, ::, ::]
     track = np.concatenate((track, new), axis=0)
-
+from matplotlib import pyplot as plt
 
 # And then compare the predictions
 # to the ground truth
 track2 = noisy_movies[which][::, ::, ::, ::]
 for i in range(15):
     fig = plt.figure(figsize=(10, 5))
-
     ax = fig.add_subplot(121)
-
     if i >= 7:
         ax.text(1, 3, 'Predictions !', fontsize=20, color='w')
     else:
         ax.text(1, 3, 'Initial trajectory', fontsize=20)
-
     toplot = track[i, ::, ::, 0]
-
     plt.imshow(toplot)
     ax = fig.add_subplot(122)
     plt.text(1, 3, 'Ground truth', fontsize=20)
-
     toplot = track2[i, ::, ::, 0]
     if i >= 2:
         toplot = shifted_movies[which][i - 1, ::, ::, 0]
-
     plt.imshow(toplot)
-    plt.savefig('%i_animate.png' % (i + 1))
+    plt.savefig(dataPath+'%i_animate.png' % (i + 1))
