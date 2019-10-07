@@ -9,6 +9,7 @@ from keras.layers.convolutional import Conv3D
 from keras.layers.convolutional_recurrent import ConvLSTM2D
 from keras.layers.normalization import BatchNormalization
 import numpy as np
+from LoadDataHelper import *
 import pylab as plt
 
 # We create a layer which take as input movies of shape
@@ -100,8 +101,8 @@ def generate_movies(n_samples=1200, n_frames=15):
 
 # Train the network
 noisy_movies, shifted_movies = generate_movies(n_samples=1200)
-# seq.fit(noisy_movies[:1000], shifted_movies[:1000], batch_size=10,
-#         epochs=30, validation_split=0.05)
+seq.fit(noisy_movies[:1000], shifted_movies[:1000], batch_size=10,
+        epochs=30, validation_split=0.05)
 dataPath = 'D:/Data/conv_lstm_data/predict_movies/'
 # Testing the network on one movie
 # feed it with the first 7 positions and then

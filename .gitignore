@@ -1,6 +1,9 @@
 *.DS_Store
 *.pyc
 *.swp
+*.png
+*.csv
+*.log
 temp/*
 dist/*
 build/*
