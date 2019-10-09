@@ -4,6 +4,11 @@
 *.png
 *.csv
 *.log
+*.npy
+*.hdf5
+*.zip
+
+
 temp/*
 dist/*
 build/*
