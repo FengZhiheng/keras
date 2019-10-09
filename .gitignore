@@ -8,6 +8,8 @@
 *.hdf5
 *.zip
 
+examples/.ipynb_checkpoints
+
 
 temp/*
 dist/*
