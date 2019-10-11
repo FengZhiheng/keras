@@ -102,7 +102,7 @@ for ep in range(0, nb_epochs):
     model.fit(X_train, y_train, batch_size=batch_size, epochs=1,
               verbose=1)
 
-    # save the model
+# save the model
 jsonstring  = model.to_json()
 with open("../models/basicRNN.json", 'wb') as f:
    f.write(jsonstring)
